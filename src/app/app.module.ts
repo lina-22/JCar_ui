@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms'; // Import FormsModule if using ngModel
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // Import FormsModule if using ngModel
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,27 +13,37 @@ import fr from '@angular/common/locales/fr';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideHttpClient } from '@angular/common/http';
 
+//NG ZORRO IMPORTS
+
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
+
 registerLocaleData(fr);
 
-
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    SignupComponent,
-
-  ],
+  declarations: [AppComponent, LoginComponent, SignupComponent],
   imports: [
     BrowserModule,
     FormsModule, // Import FormsModule here if using ngModel
-    AppRoutingModule
+    AppRoutingModule,
+    ReactiveFormsModule,
+
+    //NG ZORRO IMPORTS
+
+    NzSpinModule,
+    NzFormModule,
+    NzButtonModule,
+    NzInputModule,
+    NzLayoutModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: fr_FR },
     provideAnimationsAsync(),
-    provideHttpClient()
+    provideHttpClient(),
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
-
+export class AppModule {}
