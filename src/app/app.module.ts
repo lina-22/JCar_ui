@@ -20,6 +20,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
+import { NgZorroImportsModule } from './NgZorroImportsModule';
 
 registerLocaleData(fr);
 
@@ -30,14 +31,7 @@ registerLocaleData(fr);
     FormsModule, // Import FormsModule here if using ngModel
     AppRoutingModule,
     ReactiveFormsModule,
-
-    //NG ZORRO IMPORTS
-
-    NzSpinModule,
-    NzFormModule,
-    NzButtonModule,
-    NzInputModule,
-    NzLayoutModule,
+    NgZorroImportsModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: fr_FR },
