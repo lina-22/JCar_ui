@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-post-car',
@@ -6,6 +7,7 @@ import { Component } from '@angular/core';
   styleUrl: './post-car.component.css',
 })
 export class PostCarComponent {
+  postCarForm!: FormGroup;
   isSpinning: boolean = false;
   selectedFile: File | null = null;
   imagePreview: string | ArrayBuffer | null = null;
@@ -26,15 +28,33 @@ export class PostCarComponent {
   listOFType = ['Petrol', 'Hybrid', 'Diesel', 'Electric', 'CNG'];
   listOfColor = ['Red', 'White', 'Blue', 'Black', 'Oragne', 'Grey', 'Silver'];
   listOfTransmission = ['Manual', 'Automatic'];
-  previewImage() {
-    const reader = new FileReader();
-    reader.onload = () => {
-      this.imagePreview = reader.result;
-    };
-    // reader.readAsDataURL(this.selectedFile);
+  constructor(private fb: FormBuilder) {}
+  ngOnInit() {
+    this.postCarForm = this.fb.group({
+      name: [null, Validators.required],
+      brand: [null, Validators.required],
+      type: [null, Validators.required],
+      color: [null, Validators.required],
+      transmission: [null, Validators.required],
+      price: [null, Validators.required],
+      description: [null, Validators.required],
+      year: [null, Validators.required],
+    });
   }
-  onFileSelected($event: any) {
-    // this.selectedFile = event.target.files[0];
+  previewImage() {
+    if (this.selectedFile) {
+      // Check if selectedFile is not null
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.imagePreview = reader.result;
+      };
+      reader.readAsDataURL(this.selectedFile);
+    } else {
+      console.error('No file selected');
+    }
+  }
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
     this.previewImage();
   }
 }
